@@ -1,0 +1,64 @@
+<style>
+  h2{width: 200px;}
+  agm-map {height:400px; width: 100%; }
+  .gm-style-iw {width: 159px;}
+</style>
+      
+         
+              
+  
+  <agm-map *ngIf="postsArray.length" [latitude]="postsArray[0].equipmentLatitude" [longitude]="postsArray[0].equipmentLongitude">
+    <agm-marker *ngFor="let point of postsArray;" [latitude]="point.equipmentLatitude" [longitude]="point.equipmentLongitude">
+        <agm-info-window class="mapinfo">
+    <div class="mapPointer">
+            <div style="font-weight: bold; color: #04ae7f;">{{point.equipmentName}}</div>
+            <div class="">{{point.availbilityStatus}}</div>
+            <div class="">{{point.connectivityStatus}}</div>
+            <div class="">{{point.equipmentLocation}}</div>
+            <button style="width:100%; border:none;background: #04ae7f; color: #fff; text-align: center;line-height: 21px;    margin-top: 6px; cursor: pointer; " (click)="MoreAboutSignleEquipment($event, point)">View More</button>
+      </div>
+        </agm-info-window>
+    </agm-marker>
+  </agm-map>
+  
+  <div id="equipmentViewer" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document" >
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title"></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <p class="equidesc">Modal body text goes here.</p>
+            <p class="equistatus">Modal body text goes here.</p>
+            <p class="assetid">Modal body text goes here.</p>
+            <p class="tagnames">Modal body text goes here.</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+        </div>
+    </div>
+  </div>
+
+
+
+<table style="width: 100%;background:white;">
+  <thead>
+    <th>equipmentName</th>
+    <th style="width: 60%;float: left;word-wrap: break-word;">tagNames</th>
+    <th>connectivityStatus</th>
+    <th>equipmentWarrantyExpDate</th>
+    <th>lastConnection</th>
+  </thead>
+  <tr *ngFor="let point of EquipmentListArray;">
+    <td><button style="width:100%; border:none;background: #04ae7f; color: #fff; text-align: center;line-height: 21px;    margin-top: 6px; cursor: pointer; " (click)="MoreAboutSignleEquipment($event, point)">View More</button>{{point.equipmentName}}</td>
+    <td style="width: 60%;float: left;word-wrap: break-word;">{{point.tagNames}}</td>
+    <td>{{point.connectivityStatus}}</td>
+    <td>{{point.equipmentWarrantyExpDate}}</td>
+    <td>{{point.lastConnection}}</td>
+  </tr>
+</table>
